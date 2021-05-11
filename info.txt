@@ -1,0 +1,3 @@
+1. you can compile and run the app with "mvn clean package spring-boot:run"
+2. the app will run at "http://localhost:8080/" and a test controller is available at "http://localhost:8080/CandidateTest?name=asd"
+3. database console is accessible at "http://localhost:8080/h2-console/" with JDBC URL -> "jdbc:h2:mem:testdb" ; username -> "sa" ; password -> ""

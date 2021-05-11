@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+</head>
+<body>
+    <h2>Interviewer earnings</h2>
+    <table>
+        <tr>
+            <p>Filter by date:</p>
+            <input type="text"  th:object="${startDate}" placeholder="Start date" />
+            <input type="text"  th:object="${endDate}" placeholder="End date" />
+            <button type="submit" >Filter</button>
+        </tr>
+    </table>
+    <div class="session_container" th:each="interviewer : ${interviewerList}">
+        <table>
+          <thead>
+            <th>Name</th>
+            <th>Earning</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td th:text="${interviewer.getKey()}">name</td>
+            <td th:text="${interviewer.getValue()}">name</td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <h2>Supervisor earnings</h2>
+    <div class="session_container" th:each="supervisor : ${supervisorList}">
+        <table>
+            <thead>
+            <th>Name</th>
+            <th>Earning</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${supervisor.getKey()}">name</td>
+                <td th:text="${supervisor.getValue()}">name</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

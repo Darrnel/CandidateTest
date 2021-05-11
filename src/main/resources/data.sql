@@ -1,0 +1,96 @@
+
+
+DROP TABLE IF EXISTS Session;
+DROP TABLE IF EXISTS HourType;
+DROP TABLE IF EXISTS Interviewer;
+DROP TABLE IF EXISTS Supervisor;
+
+
+CREATE TABLE HourType(
+    ID				INT AUTO_INCREMENT PRIMARY KEY,
+    HourTypeName    VARCHAR(80)			NOT NULL,
+    Ratio			float				NOT NULL
+)
+;
+
+CREATE TABLE Supervisor(
+    ID				INT AUTO_INCREMENT PRIMARY KEY,
+    Name		    VARCHAR(80)			NOT NULL
+)
+;
+
+CREATE TABLE Interviewer(
+    ID				INT AUTO_INCREMENT PRIMARY KEY,
+    Name		    VARCHAR(80)			NOT NULL,
+    HourlyRate		float				NOT NULL,
+    SupervisorID	int					NOT NULL,
+	foreign key (SupervisorID) references Supervisor(ID)
+)
+;
+
+CREATE TABLE Session(
+	InterviewerID	int,
+	HourTypeID		int,
+	SessionStart	DATETIME,
+	SessionEnd		DATETIME,
+	foreign key (InterviewerID) references Interviewer(ID),
+	foreign key (HourTypeID) references HourType(ID)
+)
+;
+
+
+INSERT INTO HourType VALUES (1,'Interviewing'	,1.0); 
+INSERT INTO HourType VALUES (2,'Recoding'		,0.7); 
+INSERT INTO HourType VALUES (3,'Break'		,0.1); 
+INSERT INTO HourType VALUES (4,'Translating'	,1.2); 
+
+INSERT INTO Supervisor VALUES (1,'Főnök Feri');
+INSERT INTO Supervisor VALUES (2,'Vezér Viktor');
+INSERT INTO Supervisor VALUES (3,'Szuper Szilárd');
+
+
+INSERT INTO Interviewer VALUES (1,'Random József'		,5.1	,1);
+INSERT INTO Interviewer VALUES (2,'Bélám'				,4.3	,1);
+INSERT INTO Interviewer VALUES (3,'CATI Kati'			,5.6	,1);
+INSERT INTO Interviewer VALUES (4,'Márton Marika'		,2.2	,1);
+INSERT INTO Interviewer VALUES (5,'Küllő Kálmán   '	,3.3	,2);
+INSERT INTO Interviewer VALUES (6,'Hozé'				,1.1	,2);
+INSERT INTO Interviewer VALUES (7,'Kenyér'			,4.5	,2);
+
+INSERT INTO Session VALUES (1,1, '2014-02-03 15:00', '2014-02-03 17:00');
+INSERT INTO Session VALUES (1,1, '2014-02-04 15:00', '2014-02-04 17:00');
+INSERT INTO Session VALUES (1,3, '2014-02-05 10:00', '2014-02-05 17:00');
+INSERT INTO Session VALUES (1,1, '2014-02-09 16:00', '2014-02-09 17:00');
+INSERT INTO Session VALUES (1,2, '2014-03-03 15:00', '2014-03-03 17:00');
+INSERT INTO Session VALUES (1,1, '2014-03-04 15:00', '2014-03-04 17:00');
+INSERT INTO Session VALUES (1,3, '2014-03-05 10:00', '2014-03-05 17:00');
+INSERT INTO Session VALUES (1,4, '2014-03-09 16:00', '2014-03-09 17:00');
+
+INSERT INTO Session VALUES (2,1, '2014-02-03 05:00', '2014-02-03 07:00');
+INSERT INTO Session VALUES (2,2, '2014-02-04 05:00', '2014-02-04 07:00');
+INSERT INTO Session VALUES (2,3, '2014-02-05 00:00', '2014-02-05 07:00');
+INSERT INTO Session VALUES (2,2, '2014-02-09 06:00', '2014-02-09 07:00');
+INSERT INTO Session VALUES (2,2, '2014-03-03 05:00', '2014-03-03 09:00');
+INSERT INTO Session VALUES (2,1, '2014-03-04 05:00', '2014-03-04 07:00');
+INSERT INTO Session VALUES (2,3, '2014-03-05 00:00', '2014-03-05 07:00');
+INSERT INTO Session VALUES (2,1, '2014-03-09 06:00', '2014-03-09 07:00');
+INSERT INTO Session VALUES (2,1, '2014-04-09 06:00', '2014-04-09 07:00');
+INSERT INTO Session VALUES (2,1, '2014-04-09 06:00', '2014-04-09 07:00');
+INSERT INTO Session VALUES (2,1, '2014-04-09 06:00', '2014-04-09 07:00');
+
+INSERT INTO Session VALUES (4,1, '2014-02-03 15:00', '2014-02-03 21:00');
+INSERT INTO Session VALUES (4,1, '2014-02-04 15:00', '2014-02-04 19:00');
+INSERT INTO Session VALUES (4,3, '2014-02-05 10:00', '2014-02-05 17:00');
+INSERT INTO Session VALUES (4,1, '2014-02-09 16:08', '2014-02-09 17:00');
+INSERT INTO Session VALUES (4,1, '2014-03-03 15:00', '2014-03-03 16:00');
+INSERT INTO Session VALUES (4,1, '2014-03-04 15:00', '2014-03-04 17:00');
+INSERT INTO Session VALUES (4,1, '2014-10-14 15:00', '2014-10-14 15:00');
+INSERT INTO Session VALUES (4,2, '2014-03-05 10:00', '2014-03-05 12:00');
+INSERT INTO Session VALUES (4,4, '2014-03-09 16:00', '2014-03-09 17:02');
+
+
+INSERT INTO Session VALUES (5,3, '2014-02-05 10:00', '2014-02-05 19:00');
+INSERT INTO Session VALUES (5,1, '2014-02-09 16:00', '2014-02-09 23:00');
+INSERT INTO Session VALUES (5,2, '2014-03-09 10:00', '2014-03-09 12:00');
+INSERT INTO Session VALUES (5,1, '2014-03-04 15:00', '2014-03-04 17:00');
+
